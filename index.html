@@ -1,62 +1,407 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Audiolog</title>
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 32px 20px 48px;
-        line-height: 1.6;
-      }
-      h1, h2 { line-height: 1.2; }
-      .card {
-        border: 1px solid #d0d7de;
-        border-radius: 14px;
-        padding: 16px;
-        margin: 16px 0;
-      }
-      nav a { margin-right: 12px; }
-    </style>
-  </head>
-  <body>
-    <h1>Audiolog</h1>
-    <p><strong>Audiolog</strong> is a simple private diary app for voice-to-text note taking.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audiolog | Voice Journal for iOS</title>
+  <meta name="description" content="Audiolog is a private iOS voice journal with transcript capture and personal voice-metrics insights." />
+  <link rel="icon" type="image/png" href="icon.png" />
+  <style>
+    :root {
+      --bg: #f5f8fd;
+      --surface: #ffffff;
+      --text: #0b1423;
+      --muted: #4a5a73;
+      --line: #d8e1ef;
+      --primary: #1366d6;
+      --primary-soft: #e9f2ff;
+      --shadow: 0 16px 44px rgba(11, 20, 35, 0.08);
+      --shadow-soft: 0 8px 24px rgba(11, 20, 35, 0.06);
+    }
 
-    <div class="card">
-      <h2>What the app does</h2>
-      <ul>
-        <li>Captures speech and converts it to transcript text.</li>
-        <li>Saves entries locally on your device.</li>
-        <li>Supports mood and tag organization.</li>
-        <li>Allows exporting your diary entries when you choose.</li>
-      </ul>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "SF Pro Display", "Avenir Next", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(760px 360px at 0% -10%, rgba(19, 102, 214, 0.14) 0%, rgba(19, 102, 214, 0) 65%),
+        radial-gradient(760px 360px at 100% -20%, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 70%),
+        var(--bg);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(245, 248, 253, 0.82);
+      border-bottom: 1px solid rgba(216, 225, 239, 0.8);
+    }
+
+    .topbar {
+      padding: 0.9rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.62rem;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      font-size: 1.12rem;
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      margin-top: 1.4rem;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 252, 255, 0.95) 100%);
+      box-shadow: var(--shadow);
+      padding: clamp(1.2rem, 4vw, 2.2rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.1rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid #cfe0fb;
+      background: var(--primary-soft);
+      color: #1b4f95;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5.4vw, 3.55rem);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      max-width: 10.5ch;
+    }
+
+    .sub {
+      margin: 0.9rem 0 1.15rem;
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 52ch;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.4rem 0.64rem;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: #243750;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .store img {
+      height: 44px;
+      display: block;
+    }
+
+    .link-btn {
+      text-decoration: none;
+      color: #0f4fa6;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .preview {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .preview-top strong {
+      font-size: 0.95rem;
+    }
+
+    .status {
+      font-size: 0.73rem;
+      color: #1f7a49;
+      background: #e9f9ee;
+      border: 1px solid #c8ecd5;
+      border-radius: 999px;
+      padding: 0.2rem 0.48rem;
+      font-weight: 700;
+    }
+
+    .metric-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.55rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.55rem;
+      background: #fbfdff;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 1.04rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .insight {
+      border: 1px solid #d8e7ff;
+      border-radius: 12px;
+      background: #f3f8ff;
+      padding: 0.65rem;
+      color: #28405e;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .section-title {
+      margin: 2.05rem 0 0.85rem;
+      font-size: clamp(1.35rem, 3vw, 1.78rem);
+      letter-spacing: -0.01em;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .feature {
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 0.9rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid #d5e3fb;
+      background: #eff5ff;
+      color: #195ebc;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.45rem;
+    }
+
+    .feature h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(216, 225, 239, 0.9);
+      padding: 1.3rem 0 2.1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #0f4fa6;
+      font-weight: 700;
+    }
+
+    @media (max-width: 940px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      header { position: static; }
+    }
+
+    @media (max-width: 620px) {
+      .features { grid-template-columns: 1fr; }
+      .hero { border-radius: 18px; }
+      h1 { max-width: none; }
+      .topbar { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <a class="brand" href="index.html">
+        <img src="icon.png" alt="Audiolog app icon" />
+        <span>Audiolog</span>
+      </a>
+      <nav>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+        <a href="changelog.html">Changelog</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="card">
-      <h2>Privacy model</h2>
-      <p>
-        Audiolog is designed for local-first journaling. Data is stored on-device and encrypted at rest.
-        There is no user account and no app backend for diary storage.
-      </p>
-      <p>
-        If the device is lost, reset, or replaced, you may lose your notes unless you exported them.
-      </p>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">iOS Voice Journal</span>
+          <h1>Speak your day. See the signal.</h1>
+          <p class="sub">
+            Audiolog turns voice notes into clean transcripts and adds personal voice-metrics insights
+            to help you understand how your speaking patterns change over time.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Mic + transcript</span>
+            <span class="pill">Voice metrics</span>
+            <span class="pill">On-device by default</span>
+            <span class="pill">No account required</span>
+          </div>
+          <div class="actions">
+            <a class="store" href="https://apps.apple.com/us/app/audiolog-voice-diary/id6759208997" aria-label="Download Audiolog on the App Store">
+              <img src="Download_on_the_App_Store_black.svg" alt="Download on the App Store" />
+            </a>
+            <a class="link-btn" href="changelog.html">See latest updates</a>
+          </div>
+        </div>
+
+        <aside class="preview">
+          <div class="preview-top">
+            <strong>Voice Metrics Snapshot</strong>
+            <span class="status">Quality: Good</span>
+          </div>
+          <div class="metric-list">
+            <div class="metric"><span>Energy</span><b>0.61</b></div>
+            <div class="metric"><span>Speech Activity</span><b>0.74</b></div>
+            <div class="metric"><span>Pause p90</span><b>820ms</b></div>
+            <div class="metric"><span>Pitch Var.</span><b>0.19</b></div>
+          </div>
+          <div class="insight">Today: more pauses than your recent baseline. Insight is observational, not diagnostic.</div>
+        </aside>
+      </div>
+    </section>
+
+    <h2 class="section-title">Core Features</h2>
+    <section class="features">
+      <article class="feature">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/><path d="M8 21h8"/></svg></div>
+        <h3>Quick Capture</h3>
+        <p>Record voice notes and save transcripts in seconds.</p>
+      </article>
+      <article class="feature">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 4-6"/></svg></div>
+        <h3>Voice Metrics</h3>
+        <p>Track energy, pauses, pitch variability, and speech activity.</p>
+      </article>
+      <article class="feature">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+        <h3>Private by Default</h3>
+        <p>Entries and aggregate metrics are designed to remain on-device.</p>
+      </article>
+      <article class="feature">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14l-4-2-4 2-4-2-4 2V5z"/></svg></div>
+        <h3>Reflect Better</h3>
+        <p>Review your timeline and notice trend shifts over time.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>© 2026 MEDET TLEUGABYLULY LIMITED. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="support.html">Support</a>
+      <a href="changelog.html">Changelog</a>
     </div>
-
-    <nav>
-      <a href="./privacy.html">Privacy Policy</a>
-      <a href="./terms.html">Terms & Conditions</a>
-    </nav>
-
-    <p style="margin-top: 28px; font-size: 14px; color: #6b7280;">
-      © 2026 MEDET TLEUGABYLULY LIMITED. All rights reserved.
-    </p>
-  </body>
+  </footer>
+</body>
 </html>

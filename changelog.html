@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog | Audiolog</title>
+  <meta name="description" content="Audiolog product changelog and upcoming features" />
+  <style>
+    :root {
+      --bg: #f7fafe;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #d8e2ef;
+      --accent: #115e59;
+      --shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #e9fff8 0%, #f7fafe 24%, #eff6ff 100%);
+    }
+
+    .wrap {
+      width: min(920px, calc(100% - 2rem));
+      margin: 2rem auto 3rem;
+    }
+
+    .back {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .panel {
+      margin-top: 0.9rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: clamp(1.2rem, 2.7vw, 2rem);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+    }
+
+    .subtitle {
+      margin: 0.5rem 0 1.2rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    .entry {
+      border: 1px solid var(--border);
+      background: #fcfeff;
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .entry h2 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0.25rem 0 0.55rem;
+    }
+
+    .entry ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      line-height: 1.65;
+      color: #203045;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #dffaf7;
+      color: #0f5f5d;
+      border: 1px solid #b6ece6;
+    }
+
+    .foot {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .foot a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="index.html">&larr; Back to Audiolog</a>
+
+    <section class="panel">
+      <h1>Changelog</h1>
+      <p class="subtitle">Product updates for Audiolog.</p>
+
+      <article class="entry">
+        <h2>Voice Metrics and Baseline Trend Insights</h2>
+        <p class="date">Published on February 20, 2026</p>
+        <ul>
+          <li>Added speech metrics capture during recording, including energy, pauses, speech activity, pitch variability, and quality score.</li>
+          <li>Added live metric updates while recording and final aggregate metrics on stop.</li>
+          <li>Added personal-baseline interpretation to highlight behavioral drift over time.</li>
+          <li>Metrics are designed for observational feedback, not diagnosis, and are compared to your own history.</li>
+        </ul>
+        <span class="tag">Released</span>
+      </article>
+
+      <article class="entry">
+        <h2>Upcoming: Better Review Experience</h2>
+        <p class="date">Planned on February 20, 2026</p>
+        <ul>
+          <li>Improve timeline browsing for older entries.</li>
+          <li>Add richer filtering by tag and mood.</li>
+          <li>Improve export formatting for easier long-term archiving.</li>
+        </ul>
+        <span class="tag">Planned</span>
+      </article>
+
+      <article class="entry">
+        <h2>Public Legal and Support Pages Refresh</h2>
+        <p class="date">Published on February 20, 2026</p>
+        <ul>
+          <li>Created new Audiolog homepage in the legal site.</li>
+          <li>Expanded privacy disclosures for local-first usage.</li>
+          <li>Added dedicated support instructions page.</li>
+          <li>Added changelog page for future release notes.</li>
+        </ul>
+        <span class="tag">Released</span>
+      </article>
+
+      <p class="foot">
+        For support and privacy questions, please use the instructions on the <a href="support.html">Support page</a>.
+      </p>
+    </section>
+    <p class="subtitle">© 2026 MEDET TLEUGABYLULY LIMITED. All rights reserved.</p>
+  </main>
+</body>
+</html>

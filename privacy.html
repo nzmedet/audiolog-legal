@@ -1,69 +1,175 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy - Audiolog</title>
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 32px 20px 48px;
-        line-height: 1.6;
-      }
-      h1, h2 { line-height: 1.2; }
-    </style>
-  </head>
-  <body>
-    <h1>Privacy Policy</h1>
-    <p>Last updated: February 18, 2026</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Audiolog</title>
+  <meta name="description" content="Privacy Policy for Audiolog by MEDET TLEUGABYLULY LIMITED" />
+  <style>
+    :root {
+      --bg: #f7fafe;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #d8e3f1;
+      --accent: #115e59;
+      --shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
 
-    <h2>Overview</h2>
-    <p>
-      Audiolog is a local diary app. We do not provide cloud accounts or host diary content on our own backend.
-    </p>
+    * { box-sizing: border-box; }
 
-    <h2>Data we process</h2>
-    <ul>
-      <li>Diary transcripts created from speech recognition.</li>
-      <li>Entry metadata such as timestamps, mood, and tags.</li>
-      <li>Biometric lock preference stored on-device.</li>
-    </ul>
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(160deg, #e9fff9 0%, var(--bg) 35%, #edf4ff 100%);
+      line-height: 1.66;
+    }
 
-    <h2>How data is stored</h2>
-    <p>
-      Diary data is stored locally on your device. Transcript content is encrypted at rest on-device.
-    </p>
+    .wrap {
+      width: min(920px, calc(100% - 2rem));
+      margin: 2rem auto 3rem;
+    }
 
-    <h2>Data sharing</h2>
-    <p>
-      We do not sell your data. Data is shared only when you explicitly use export or iOS sharing features.
-    </p>
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(1.2rem, 2.5vw, 2rem);
+      box-shadow: var(--shadow);
+    }
 
-    <h2>Permissions</h2>
-    <p>
-      Audiolog may request microphone and speech recognition permissions to transcribe your notes,
-      and optional biometric permission to lock app access.
-    </p>
+    h1 {
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+    }
 
-    <h2>Your control</h2>
-    <ul>
-      <li>You can delete entries at any time in the app.</li>
-      <li>You can export entries using the export feature.</li>
-      <li>You can uninstall the app to remove local app data from the device.</li>
-    </ul>
+    .meta {
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+      font-size: 0.95rem;
+    }
 
-    <h2>Contact</h2>
-    <p>For privacy questions, contact: nzmedet@gmail.com</p>
+    h2 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.4rem;
+      font-size: 1.2rem;
+    }
 
-    <p style="margin-top: 28px; font-size: 14px; color: #6b7280;">
-      © 2026 MEDET TLEUGABYLULY LIMITED. All rights reserved.
-    </p>
+    p, li {
+      color: #243244;
+    }
 
-    <p><a href="./index.html">Back to Home</a></p>
-  </body>
+    ul {
+      padding-left: 1.1rem;
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .notice {
+      border-left: 4px solid #0f766e;
+      background: #e9fdf7;
+      padding: 0.8rem 0.9rem;
+      border-radius: 8px;
+      color: #0f4f4b;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="index.html">&larr; Back to Audiolog</a>
+
+    <section class="card">
+      <h1>Privacy Policy</h1>
+      <p class="meta">Last updated: February 20, 2026</p>
+
+      <p>
+        This Privacy Policy explains how <strong>MEDET TLEUGABYLULY LIMITED</strong>
+        ("Company", "we", "us", "our") handles information when you use Audiolog.
+      </p>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Audiolog is designed as a local-first iOS app.</li>
+        <li>Audiolog does not require account registration.</li>
+        <li>Audiolog is not intended to upload your diary content to our cloud servers.</li>
+        <li>Audiolog can compute aggregate voice metrics for insight and trend features.</li>
+      </ul>
+
+      <h2>Data We Process</h2>
+      <p>
+        Audiolog processes and stores your entries, transcript text, timestamps, tags, and other journal metadata locally so core features work.
+      </p>
+      <p>
+        Audiolog may also process aggregate voice metrics such as energy, pauses, pitch variability, speech activity ratio, and quality score.
+      </p>
+      <p>
+        We do not intentionally collect profile information such as your name, phone number, or email through in-app account signup.
+      </p>
+
+      <h2>Voice Metrics and Insights</h2>
+      <p>
+        Voice metrics are measurement summaries used to provide feedback about changes in your own speaking patterns over time.
+        They are interpreted relative to your personal baseline, not compared against other users.
+      </p>
+      <p>
+        Audiolog is designed so raw audio files are not persisted for this feature. The app uses transcript text and aggregate metric values.
+      </p>
+
+      <h2>Permissions</h2>
+      <p>
+        Audiolog may request permissions such as microphone and speech recognition to provide voice-to-text features,
+        and optional biometric permissions if you enable app lock functionality.
+      </p>
+
+      <h2>Data Sharing</h2>
+      <p>
+        We do not sell or rent your data. Your diary content is shared only when you choose to export or use iOS share flows.
+      </p>
+
+      <h2>Data Retention</h2>
+      <p>
+        Your journal data remains on your device until you edit or delete it, or remove the app. If you uninstall the app,
+        local app data may be removed by iOS.
+      </p>
+
+      <h2>Children's Privacy</h2>
+      <p>
+        Audiolog is not directed to children under 13. We do not knowingly collect personal data from children under 13.
+      </p>
+
+      <h2>Your Choices</h2>
+      <ul>
+        <li>You can edit or delete entries inside the app.</li>
+        <li>You can export your own data when needed.</li>
+        <li>You can remove local app data by uninstalling the app.</li>
+      </ul>
+
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Updated versions will appear on this page with a revised "Last updated" date.
+      </p>
+
+      <h2>Contact and Support</h2>
+      <p>
+        For privacy questions, review the <a href="support.html">Support page</a> for the current support channel.
+      </p>
+
+      <p class="notice">
+        If you do not agree with this policy, you should discontinue using Audiolog.
+      </p>
+    </section>
+  </main>
+</body>
 </html>
