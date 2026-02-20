@@ -93,6 +93,22 @@
       line-height: 1.7;
     }
 
+    .send-email {
+      margin-top: 0.75rem;
+      border: 1px solid #0f6b65;
+      background: linear-gradient(180deg, #1aa195 0%, #0f766e 100%);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 0.55rem 0.9rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    .send-email:hover {
+      filter: brightness(0.96);
+    }
+
     footer {
       margin-top: 1.2rem;
       color: var(--muted);
@@ -124,17 +140,17 @@
     <section class="hero">
       <h1>Support</h1>
       <p class="subtitle">
-        Need help with Audiolog? Use the support method listed in the App Store entry for Audiolog,
-        or the support entry point available in the app.
+        Need help with Audiolog? Send your request directly from this page.
       </p>
 
       <div class="grid">
         <article class="card">
           <h2>How to Contact Support</h2>
           <p>
-            Open Audiolog in the App Store and use the support contact listed there.
-            Include your message in one request so we can triage faster.
+            Use the button below to open your email app with a pre-filled support draft.
+            Include your issue in one message so we can triage faster.
           </p>
+          <button id="send-email" class="send-email" type="button">Send Email</button>
         </article>
 
         <article class="card">
@@ -167,11 +183,34 @@
       <footer>
         <div>© 2026 MEDET TLEUGABYLULY LIMITED. All rights reserved.</div>
         <div class="links">
+          <a href="faq.html">FAQ</a>
           <a href="privacy.html">Privacy Policy</a>
           <a href="changelog.html">Changelog</a>
         </div>
       </footer>
     </section>
   </main>
+  <script>
+    (function () {
+      var btn = document.getElementById("send-email");
+      if (!btn) return;
+
+      btn.addEventListener("click", function () {
+        var email = String.fromCharCode(
+          110, 122, 109, 101, 100, 101, 116, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109
+        );
+        var subject = encodeURIComponent("Audiolog Support Request");
+        var body = encodeURIComponent(`Hi,
+I need help with Audiolog.
+Device: 
+iOS version: 
+App version: 
+Expected behavior: 
+Actual behavior: 
+Steps to reproduce: `);
+        window.location.href = "mailto:" + email + "?subject=" + subject + "&body=" + body;
+      });
+    })();
+  </script>
 </body>
 </html>
